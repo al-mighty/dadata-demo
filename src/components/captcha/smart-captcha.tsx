@@ -20,17 +20,31 @@ export function SmartCaptcha({ siteKey, onToken }: Props) {
     if (!document.getElementById(scriptId)) {
       const script = document.createElement('script');
       script.id = scriptId;
-      script.src = 'https://smartcaptcha.yandexcloud.net/captcha.js?render=onload';
+      script.src = 'https://smartcaptcha.yandexcloud.net/captcha.js';
       script.async = true;
+      script.onload = () => console.log('[SmartCaptcha] Script loaded');
+      script.onerror = (e) => console.error('[SmartCaptcha] Script failed to load', e);
       document.head.appendChild(script);
     }
 
+    let attempts = 0;
     const interval = setInterval(() => {
-      if ((window as any).smartCaptcha && containerRef.current && widgetRef.current === null) {
-        widgetRef.current = (window as any).smartCaptcha.render(containerRef.current, {
-          sitekey: siteKey,
-          callback: handleSuccess,
-        });
+      attempts++;
+      const sc = (window as any).smartCaptcha;
+      if (sc && containerRef.current && widgetRef.current === null) {
+        try {
+          widgetRef.current = sc.render(containerRef.current, {
+            sitekey: siteKey,
+            callback: handleSuccess,
+          });
+          console.log('[SmartCaptcha] Rendered, widget:', widgetRef.current);
+        } catch (e) {
+          console.error('[SmartCaptcha] Render error:', e);
+        }
+        clearInterval(interval);
+      }
+      if (attempts > 50) {
+        console.error('[SmartCaptcha] Timeout - window.smartCaptcha not available');
         clearInterval(interval);
       }
     }, 200);
