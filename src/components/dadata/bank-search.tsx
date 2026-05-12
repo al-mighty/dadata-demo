@@ -1,17 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useDadata } from '@/hooks/use-dadata';
 import type { DadataBank, DadataSuggestion } from '@/lib/dadata/types';
 
 export function BankSearch() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const { query, setQuery, suggestions, isLoading, setSuggestions } = useDadata<DadataBank>('bank-suggest');
   const [selected, setSelected] = useState<DadataSuggestion<DadataBank> | null>(null);
+
+  useEffect(() => {
+    const q = searchParams.get('q');
+    if (q && !query) setQuery(q);
+  }, []);
 
   const handleSelect = (s: DadataSuggestion<DadataBank>) => {
     setSelected(s);
     setQuery(s.value);
     setSuggestions([]);
+    router.replace(`?q=${encodeURIComponent(s.data.bic)}`, { scroll: false });
   };
 
   const d = selected?.data;

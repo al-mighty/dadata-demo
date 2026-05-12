@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useDadata } from '@/hooks/use-dadata';
 import type { DadataParty, DadataSuggestion } from '@/lib/dadata/types';
 
@@ -20,13 +21,23 @@ const STATUS_MAP: Record<string, { label: string; color: string }> = {
 };
 
 export function CompanySearch() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const { query, setQuery, suggestions, isLoading, setSuggestions } = useDadata<DadataParty>('party-suggest');
   const [selected, setSelected] = useState<DadataSuggestion<DadataParty> | null>(null);
+
+  // Load from URL on mount
+  useEffect(() => {
+    const q = searchParams.get('q');
+    if (q && !query) setQuery(q);
+  }, []);
 
   const handleSelect = (s: DadataSuggestion<DadataParty>) => {
     setSelected(s);
     setQuery(s.value);
     setSuggestions([]);
+    const inn = s.data.inn;
+    if (inn) router.replace(`?q=${encodeURIComponent(inn)}`, { scroll: false });
   };
 
   const d = selected?.data;

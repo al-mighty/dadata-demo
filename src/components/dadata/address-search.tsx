@@ -1,17 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useDadata } from '@/hooks/use-dadata';
 import type { DadataAddress, DadataSuggestion } from '@/lib/dadata/types';
 
 export function AddressSearch() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const { query, setQuery, suggestions, isLoading, setSuggestions } = useDadata<DadataAddress>('address');
   const [selected, setSelected] = useState<DadataSuggestion<DadataAddress> | null>(null);
+
+  useEffect(() => {
+    const q = searchParams.get('q');
+    if (q && !query) setQuery(q);
+  }, []);
 
   const handleSelect = (s: DadataSuggestion<DadataAddress>) => {
     setSelected(s);
     setQuery(s.value);
     setSuggestions([]);
+    router.replace(`?q=${encodeURIComponent(s.value)}`, { scroll: false });
   };
 
   return (

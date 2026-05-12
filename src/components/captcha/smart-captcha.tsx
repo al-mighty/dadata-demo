@@ -38,5 +38,9 @@ export function SmartCaptcha({ siteKey, onToken }: Props) {
     return () => clearInterval(interval);
   }, [siteKey, handleSuccess]);
 
-  return <div ref={containerRef} />;
+  if (!siteKey) {
+    return <div className="text-xs text-red-400 p-3 bg-red-500/10 rounded-lg">SmartCaptcha: ключ не задан (NEXT_PUBLIC_SMARTCAPTCHA_CLIENT_KEY)</div>;
+  }
+
+  return <div ref={containerRef} className="min-h-[100px]" />;
 }
