@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DaData API Demo
+
+Interactive demo of the [DaData](https://dadata.ru) suggestions and validation API, protected by Yandex SmartCaptcha. Four pages showcasing address autocomplete, company lookup, bank search, and contractor validation with server-side processing.
+
+**Live:** [cheslav.space/dadata](https://cheslav.space/dadata/)
+
+## Tech Stack
+
+- **Next.js 16** — App Router, Server Actions
+- **React 19** — React Hook Form + Zod validation
+- **TypeScript**
+- **Tailwind CSS 4**
+- **Yandex SmartCaptcha** — bot protection on form submissions
+- **DaData API** — suggestions and data enrichment
+
+## Pages
+
+| Route | Feature |
+|-------|---------|
+| `/address` | Address autocomplete with suggestions dropdown |
+| `/company` | Company lookup by name, INN, or OGRN |
+| `/bank` | Bank search with BIC/SWIFT details |
+| `/form` | Contractor validation — composite form with all lookups |
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Create `.env.local` with the following keys:
+
+```env
+DADATA_API_KEY=your_dadata_api_key
+DADATA_SECRET_KEY=your_dadata_secret_key
+NEXT_PUBLIC_SMARTCAPTCHA_CLIENT_KEY=your_client_key
+SMARTCAPTCHA_SERVER_KEY=your_server_key
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Run
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev        # http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Build
 
-## Learn More
+```bash
+npm run build
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+dadata-demo/
+├── src/
+│   ├── app/
+│   │   ├── address/        # Address autocomplete page
+│   │   ├── company/        # Company lookup page
+│   │   ├── bank/           # Bank search page
+│   │   ├── form/           # Contractor validation form
+│   │   │   └── actions.ts  # Server Actions for form processing
+│   │   ├── api/
+│   │   │   └── dadata/     # API route for DaData proxy
+│   │   ├── layout.tsx      # Root layout
+│   │   └── page.tsx        # Landing page
+│   ├── components/
+│   │   ├── ui/             # Reusable UI primitives
+│   │   ├── captcha/        # SmartCaptcha widget
+│   │   ├── dadata/         # DaData suggestion components
+│   │   ├── form/           # Form field components
+│   │   └── layout/         # Page layout wrappers
+│   ├── hooks/
+│   │   ├── use-dadata.ts   # DaData API hook with caching
+│   │   └── use-debounce.ts # Input debounce hook
+│   └── lib/
+│       ├── dadata/         # DaData API client & types
+│       ├── captcha/        # SmartCaptcha verification
+│       └── rate-limit.ts   # Server-side rate limiting
+├── package.json
+└── tsconfig.json
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Author
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Vyacheslav Kovalev — [GitHub](https://github.com/al-mighty) · [cheslav.space](https://cheslav.space)
