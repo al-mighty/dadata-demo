@@ -4,6 +4,13 @@ import { useState } from 'react';
 import { useDadata } from '@/hooks/use-dadata';
 import type { DadataParty, DadataSuggestion } from '@/lib/dadata/types';
 
+const PREMIUM_FIELDS_COMPANY = [
+  'Выручка', 'Прибыль/убыток', 'Учредители и доли',
+  'Лицензии', 'Налоговая задолженность', 'Контакты (тел, email)',
+  'Филиалы', 'Предшественники', 'Правопреемники',
+  'Количество филиалов', 'Среднесписочная численность', 'Система налогообложения',
+];
+
 const STATUS_MAP: Record<string, { label: string; color: string }> = {
   ACTIVE: { label: 'Действующая', color: 'text-green-400 bg-green-500/10' },
   LIQUIDATING: { label: 'Ликвидируется', color: 'text-yellow-400 bg-yellow-500/10' },
@@ -80,6 +87,19 @@ export function CompanySearch() {
             <div className="md:col-span-2 bg-neutral-900 p-4">
               <span className="text-xs text-neutral-500 uppercase tracking-wider">Адрес</span>
               <div className="text-sm text-white mt-1">{d.address?.value}</div>
+            </div>
+          </div>
+          <div className="p-4 border-t border-neutral-800 bg-neutral-900/50">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-amber-400 text-sm">⭐</span>
+              <span className="text-xs text-amber-400 uppercase tracking-wider font-medium">Доступно на платном тарифе</span>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+              {PREMIUM_FIELDS_COMPANY.map(f => (
+                <div key={f} className="text-xs text-neutral-600 bg-neutral-800/50 rounded px-2.5 py-1.5 border border-neutral-800 border-dashed">
+                  {f}
+                </div>
+              ))}
             </div>
           </div>
         </div>

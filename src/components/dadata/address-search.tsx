@@ -66,6 +66,20 @@ export function AddressSearch() {
             </div>
           )}
         </div>
+
+        <div className="md:col-span-2 bg-neutral-900/50 rounded-lg p-4 border border-neutral-800">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="text-amber-400 text-sm">⭐</span>
+            <span className="text-xs text-amber-400 uppercase tracking-wider font-medium">Доступно на платном тарифе</span>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+            {['Часовой пояс', 'Код КЛАДР', 'Код ИФНС', 'Стоимость кв.м.', 'Район города', 'Федеральный округ', 'Кадастровый номер', 'Этаж', 'Подъезд'].map(f => (
+              <div key={f} className="text-xs text-neutral-600 bg-neutral-800/50 rounded px-2.5 py-1.5 border border-neutral-800 border-dashed">
+                {f}
+              </div>
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );
