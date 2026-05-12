@@ -19,7 +19,8 @@ export function useDadata<T>(entity: string, minLength = 2) {
     const controller = new AbortController();
     setIsLoading(true);
 
-    fetch(`/api/dadata/${entity}?q=${encodeURIComponent(debouncedQuery)}`, {
+    const base = window.location.pathname.startsWith('/dadata') ? '/dadata' : '';
+    fetch(`${base}/api/dadata/${entity}?q=${encodeURIComponent(debouncedQuery)}`, {
       signal: controller.signal,
     })
       .then(r => r.json())
