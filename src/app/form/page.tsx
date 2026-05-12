@@ -1,4 +1,10 @@
+import type { Metadata } from 'next';
 import { ContractorCheck } from '@/components/form/contractor-check';
+
+export const metadata: Metadata = {
+  title: 'Contractor Validation',
+  description: 'Enter a TIN to get a full contractor report. Server Actions, Zod validation, Yandex SmartCaptcha protection.',
+};
 
 export default function FormPage() {
   return (

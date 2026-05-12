@@ -1,5 +1,11 @@
+import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { CompanySearch } from '@/components/dadata/company-search';
+
+export const metadata: Metadata = {
+  title: 'Company Lookup',
+  description: 'DaData Party API demo: search companies by TIN or name, view details including management, OKVED codes and registration status.',
+};
 
 export default function CompanyPage() {
   return (

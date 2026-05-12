@@ -1,5 +1,11 @@
+import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { BankSearch } from '@/components/dadata/bank-search';
+
+export const metadata: Metadata = {
+  title: 'Bank Lookup',
+  description: 'DaData Bank API demo: search banks by BIC or name, view correspondent account, SWIFT code and address.',
+};
 
 export default function BankPage() {
   return (

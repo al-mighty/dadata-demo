@@ -1,5 +1,11 @@
+import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { AddressSearch } from '@/components/dadata/address-search';
+
+export const metadata: Metadata = {
+  title: 'Address Autocomplete',
+  description: 'DaData Suggestions API demo: address autocomplete with breakdown into postal code, city, street, coordinates and metro stations.',
+};
 
 export default function AddressPage() {
   return (

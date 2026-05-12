@@ -6,8 +6,26 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 
 export const metadata: Metadata = {
-  title: 'DaData Demo — Address, Company & Bank Search',
-  description: 'Next.js 15 demo: DaData API integration with Yandex SmartCaptcha',
+  title: {
+    default: 'DaData Demo — Address, Company & Bank Search',
+    template: '%s | DaData Demo',
+  },
+  description: 'Next.js 15 demo showcasing DaData API integration: address autocomplete, company and bank lookup, contractor validation with Yandex SmartCaptcha. Built by Vyacheslav Kovalev.',
+  keywords: ['DaData', 'Next.js', 'TypeScript', 'Server Actions', 'Zod', 'Yandex SmartCaptcha', 'React Hook Form', 'Vyacheslav Kovalev'],
+  openGraph: {
+    title: 'DaData Demo — Address, Company & Bank Search',
+    description: 'Next.js 15 demo: DaData API integration with address autocomplete, company and bank lookup, contractor validation and Yandex SmartCaptcha.',
+    url: 'https://cheslav.space/dadata/',
+    siteName: 'DaData Demo',
+    images: [{ url: 'https://cheslav.space/og-image.jpg', width: 1200, height: 630 }],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'DaData Demo — Address, Company & Bank Search',
+    description: 'Next.js 15 demo: DaData API with autocomplete, company lookup, SmartCaptcha.',
+    images: ['https://cheslav.space/og-image.jpg'],
+  },
 };
 
 const NAV = [

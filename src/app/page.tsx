@@ -1,4 +1,10 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'DaData Demo — Address, Company & Bank Search',
+  description: 'Next.js 15 demo: DaData API integration with address autocomplete, company/bank lookup, contractor validation and Yandex SmartCaptcha.',
+};
 
 const DEMOS = [
   { href: '/address', icon: '📍', title: 'Адрес', desc: 'Автокомплит адреса с разбором на поля: индекс, город, улица, координаты, метро' },
