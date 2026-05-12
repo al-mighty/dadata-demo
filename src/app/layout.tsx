@@ -15,7 +15,7 @@ const NAV = [
   { href: '/address', label: 'Адрес' },
   { href: '/company', label: 'Компания' },
   { href: '/bank', label: 'Банк' },
-  { href: '/form', label: 'Форма' },
+  { href: '/form', label: 'Проверка' },
 ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

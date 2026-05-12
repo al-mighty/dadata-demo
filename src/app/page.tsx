@@ -4,7 +4,7 @@ const DEMOS = [
   { href: '/address', icon: '📍', title: 'Адрес', desc: 'Автокомплит адреса с разбором на поля: индекс, город, улица, координаты, метро' },
   { href: '/company', icon: '🏢', title: 'Компания', desc: 'Поиск по ИНН или названию: реквизиты, руководство, ОКВЭД, статус' },
   { href: '/bank', icon: '🏦', title: 'Банк', desc: 'Поиск по БИК или названию: корр. счёт, SWIFT, адрес' },
-  { href: '/form', icon: '📝', title: 'Регистрация', desc: 'Полная форма с DaData подсказками, валидацией Zod и Yandex SmartCaptcha' },
+  { href: '/form', icon: '🔍', title: 'Проверка контрагента', desc: 'Введите ИНН + БИК — полный отчёт. Server Actions, Zod валидация, Yandex SmartCaptcha' },
 ];
 
 export default function Home() {
